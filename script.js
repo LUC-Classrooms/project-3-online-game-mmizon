@@ -1,9 +1,11 @@
 /**
  * Project 3 versions 0-4 - 2D Web Game
- * Name:
+ * Name: Madison Mizon 
  * 
  * Use this template to get started creating a simple 2D game for the web using P5.js. 
  */
+
+var gameState = "splash"
 
 function setup() {
 
@@ -17,7 +19,19 @@ function draw() {
   //splash(); // call the splash screen function (below)
   //play(); // call the play screen function (below)
   //gameOver(); // call the gameOver screen function (below)
-
+  switch(gameState){ //will cascade thru a bunch of choices. 
+    case "splash" : //if gameState contains splash 
+      splash(); //then run splash funciton 
+      break;
+    case "play" : //if the value of gameState is play -->
+      play(); //go to play funciton 
+      break; //if you don't have break, it will continue through the code and execute all at the same time, it will all be immidiately overwritten. 
+    case "gameOver" : 
+      gameOver();
+      break;
+    default : 
+      console.log("no math found");
+  }
 }
 
 function splash() {
@@ -51,6 +65,13 @@ function gameOver() {
 
 function mousePressed() {
 
-  console.log("click!");
-
+  console.log("click!"); //no default situation, one of the three below things have to be true
+  if(gameState == "splash"){
+    gameState = "play";
+  } else if(gameState == "play"){ //if the first thing is not true, it will check the next situation
+    gameState = "gameOver";
+  } else if (gameState == "gameOver"){ //of the other thing is not true, it will check this situation. Basically one has to be true. 
+  gameState = "splash";
+  }
+console.log(gameState); //look at the value of gameState
 }
