@@ -4,6 +4,8 @@ function Player(tempX, tempY) {
   this.y = tempY;
   this.diam = 50;
   this.angle = 0;
+  this.xSpeed = 0;
+  this.ySpeed = 0;
 
   this.display = function () {
     push(); // create a drawing layer
@@ -38,6 +40,7 @@ function Player(tempX, tempY) {
     // uncomment the next two lines to see the circle
     // noFill();
     // ellipse(0, 0, this.diam, this.diam);
+    ellipse (x1, y1, 5);
 
     pop(); // dispose of this layer
 
@@ -46,8 +49,38 @@ function Player(tempX, tempY) {
 
   this.move = function () {
 //folow the mouse for now
-    this.x = mouseX;
-    this.y = mouseY;
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
+
+    if(this.x > width || this.x < 0){
+      this.x = abs(this.x - width); //absolute value. wrap around
+    }
+  if(this.y > height || this.y <0)
+  this.y = abs(this.y - height); //absolute value. wrap around
 
   }
+
+  this.thrust = function(){
+    let horiz = Math.sin(this.angle);
+    let vert = Math.cos(this.angle);
+    //use these as a multiplier to the xSpeed and ySpeed
+    this.xSpeed += .02 * horiz;
+    this.ySpeed -= .02 * vert;
+  }
+
+  this.brake = function() {
+    if(this.xSpeed > 0) {
+      this.xSpeed -= .01; // slow down!
+   }
+   else {
+      this.xSpeed += .01 // speed was less than 0, so bring it back up
+   }
+      if (this.ySpeed > 0) {
+      this.ySpeed -= 0; // slow down on y axis, too!
+      }
+    else {
+      this.ySpeed += .01; // bring up to 0 if we went too far
+    }
+  }
+
 }
