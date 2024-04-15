@@ -7,12 +7,14 @@
 
 var gameState = "splash"
 var player1;
+var gameTimer; //time the game play
 
 function setup() {
 
   createCanvas(600, 400);
   player1 = new Player(width/2, height * 4/5);
   console.log(player1);
+  gameTimer = new Timer(10000); //10 second timer 
 
 }
 
@@ -57,6 +59,12 @@ function play() {
   //player1.x = mouseX;
   player1.display();
   player1.move();
+  if(gameTimer.isFinished()){ //uses timer to...
+    gameState = "gameOver" ///go to game over screen when time is up
+  }
+  textAlign(LEFT);
+text("elapsed time: " + gameTimer.elapsedTime, 40, 100);
+// show elapsed time in top left corner
 
   if(keyIsPressed)
   {
@@ -93,8 +101,9 @@ function gameOver() {
 function mousePressed() {
 
   console.log("click!"); //no default situation, one of the three below things have to be true
-  if(gameState == "splash"){
+  if(gameState == "splash"){ //look to see if the value of gameState matches 'splash' so start the splash screen
     gameState = "play";
+    gameTimer.start(); //start the timer 
   } else if(gameState == "play"){ //if the first thing is not true, it will check the next situation
     //gameState = "gameOver"; //commented out so i can click the mouse and keep on the game screen
   } else if (gameState == "gameOver"){ //of the other thing is not true, it will check this situation. Basically one has to be true. 
