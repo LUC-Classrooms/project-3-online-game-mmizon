@@ -12,6 +12,7 @@ var testBox; // a box to preview on the splash screen
 var dropTimer; // regulate box drops
 var presents = new Array(0); // an empty array called "presents"
 
+
 function setup() {
 
   createCanvas(600, 400);
@@ -95,6 +96,32 @@ text("elapsed time: " + gameTimer.elapsedTime, 40, 100);
      }
   }
 
+  if(dropTimer.isFinished()) { //added this section for arrays version
+    let p = new Box(random(width), -40);
+    // new box, anywhere across the width of the canvas, but 40px above the canvas
+    presents.push(p); // add object 'p' to the 'presents' Array
+    dropTimer.start(); // restart timer for next drop
+  }
+
+  for(let i = 0; i < presents.length; i++) { //added this section for arrays version
+    // for each element of the array, represented by 'i', do the following:
+    presents[i].display(); // draw it on the canvas
+    presents[i].move(); // make it drop
+    presents[i].spin() // make it rotate
+
+    if(presents[i].y > height) {
+      // present went below the canvas
+      presents.splice(i, 1);
+      // remove 1 element from from "presents" at index 'i'
+    }
+
+    let d = dist(presents[i].x, presents[i].y, player1.x, player1.y);
+    //d is not the distance in pixels between presents[i] and player1 
+    if (d < 50) {
+      presents.splice(i, 1); // remove 1 item at index 'i'
+    }
+  }
+
 }
 
 function gameOver() {
@@ -112,6 +139,7 @@ function mousePressed() {
   if(gameState == "splash"){ //look to see if the value of gameState matches 'splash' so start the splash screen
     gameState = "play";
     gameTimer.start(); //start the timer 
+    dropTimer.start(); // start the drop timer for presents
   } else if(gameState == "play"){ //if the first thing is not true, it will check the next situation
     //gameState = "gameOver"; //commented out so i can click the mouse and keep on the game screen
   } else if (gameState == "gameOver"){ //of the other thing is not true, it will check this situation. Basically one has to be true. 
