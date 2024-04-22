@@ -8,6 +8,9 @@
 var gameState = "splash"
 var player1;
 var gameTimer; //time the game play
+var testBox; // a box to preview on the splash screen
+var dropTimer; // regulate box drops
+var presents = new Array(0); // an empty array called "presents"
 
 function setup() {
 
@@ -15,6 +18,8 @@ function setup() {
   player1 = new Player(width/2, height * 4/5);
   console.log(player1);
   gameTimer = new Timer(10000); //10 second timer 
+  dropTimer = new Timer(1000); //timer for 1 second 
+  testBox = new Box(width/2, height/3); //make one instancec of a box object 
 
 }
 
@@ -47,6 +52,9 @@ function splash() {
   text("Let's Play a Game!", width / 2, height / 2);
   textSize(12);
   text("(click the mouse to continue)", width / 2, height / 2 + 30);
+
+  testBox.display(); //shows the box present 
+  testBox.spin(); //spins the box present! 
 }
 
 function play() {
