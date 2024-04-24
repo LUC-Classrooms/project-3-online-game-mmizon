@@ -11,6 +11,7 @@ var gameTimer; //time the game play
 var testBox; // a box to preview on the splash screen
 var dropTimer; // regulate box drops
 var presents = new Array(0); // an empty array called "presents"
+var score = 0; // keep track of points (starting at 0)
 
 
 function setup() {
@@ -74,6 +75,7 @@ function play() {
   textAlign(LEFT);
 text("elapsed time: " + gameTimer.elapsedTime, 40, 100);
 // show elapsed time in top left corner
+text("Score: " + score, 20, 40); //text for the score 
 
   if(keyIsPressed)
   {
@@ -113,12 +115,14 @@ text("elapsed time: " + gameTimer.elapsedTime, 40, 100);
       // present went below the canvas
       presents.splice(i, 1);
       // remove 1 element from from "presents" at index 'i'
+      score--; // decrement score by 1
     }
 
     let d = dist(presents[i].x, presents[i].y, player1.x, player1.y);
     //d is not the distance in pixels between presents[i] and player1 
     if (d < 50) {
       presents.splice(i, 1); // remove 1 item at index 'i'
+      score ++; // add 1 point!
     }
   }
 
@@ -131,6 +135,7 @@ function gameOver() {
   textAlign(CENTER);
   textSize(16);
   text("Game Over!", width / 2, height / 2);
+  text("Your final score: " + score, width/2, height * 2/3); //shows final score at the end of the game
 }
 
 function mousePressed() {
@@ -140,6 +145,7 @@ function mousePressed() {
     gameState = "play";
     gameTimer.start(); //start the timer 
     dropTimer.start(); // start the drop timer for presents
+    score = 0; // reset score to 0 at start of game
   } else if(gameState == "play"){ //if the first thing is not true, it will check the next situation
     //gameState = "gameOver"; //commented out so i can click the mouse and keep on the game screen
   } else if (gameState == "gameOver"){ //of the other thing is not true, it will check this situation. Basically one has to be true. 
