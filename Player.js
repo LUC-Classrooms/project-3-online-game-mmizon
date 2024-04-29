@@ -12,7 +12,7 @@ function Player(tempX, tempY) {
     translate(this.x, this.y); // move origin point
     rotate(this.angle); // player can rotate
 
-    fill(0); // black
+    fill(0, 200, 0); // green
     /** calculate points on a triangle based on a unit circle. You could use this method to draw more complex polygons that would fit inside a circle centered on (this.x, this.y)
      * For any point around the circle, x = the cosine of the angle in radians from 0 to TWO_PI, and y = the sine of that angle. an angle of 0 is the right side of the circle, PI is the left side. 
      * The points generated this way are relative to the coordinate point (0,0). 
@@ -32,15 +32,35 @@ function Player(tempX, tempY) {
     //draw the triangle:
     //triangle(x1, y1, x2, y2, x3, y3);
     //or draw a complex polygon
-    beginShape();
-    vertex(x1, y1);
-    vertex(x2, y2);
-    vertex(x3, y3);
-    endShape();
+
+    //beginShape();
+    //vertex(x1, y1);
+   // vertex(x2, y2);
+    //vertex(x3, y3);
+   // endShape();
     // uncomment the next two lines to see the circle
     // noFill();
     // ellipse(0, 0, this.diam, this.diam);
-    ellipse (x1, y1, 5);
+    //ellipse (x1, y1, 5);
+    ellipse (0, 0, 50)
+    fill(144, 238, 144) //make background color 
+    strokeWeight(0); //no line around triangle
+    triangle(0, 0, -20, -26, 20, -26) //triangle (to make mouth hole, basically)
+    fill(200, 0, 0) //red 
+    triangle(0, 0, 5, -5, -16, -22) //red inside of mouth
+    triangle(0, 0, -5, -5, 16, -22) //red inside of mouth
+    strokeWeight(1) //so you can see the following lines
+    line(-5, -5, 1, -13) //add lines for the mouth bits of the venus fly trap
+    line(5, -5, -1, -13)
+    line(-11, -11, -1, -19)
+    line(11, -11, 1, -19)
+    line(-17, -17, -3, -26)
+    line(17, -17, 3, -26)
+    fill(0, 200, 0) //green
+    ellipse(23, 20, 30, 20) //leaf
+    ellipse(-23, 20, 30, 20) //leaf 
+    line(13, 20, 33, 20) //line in leaf
+    line(-13, 20, -33, 20) //line in leaf 
 
     pop(); // dispose of this layer
 

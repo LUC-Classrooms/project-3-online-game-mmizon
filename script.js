@@ -21,7 +21,7 @@ function setup() {
   console.log(player1);
   gameTimer = new Timer(10000); //10 second timer 
   dropTimer = new Timer(1000); //timer for 1 second 
-  testBox = new Box(width/2, height/3); //make one instancec of a box object 
+  testBox = new Box(width/2, height/3); //make one instancec of a box object (changed to my fly)
 
 }
 
@@ -38,36 +38,36 @@ function draw() {
     case "play" : //if the value of gameState is play -->
       play(); //go to play funciton 
       break; //if you don't have break, it will continue through the code and execute all at the same time, it will all be immidiately overwritten. 
-    case "gameOver" : 
+    case "gameOver" :  //if the value os gameState is gameOver
       gameOver();
       break;
     default : 
-      console.log("no math found");
+      console.log("no math found"); //what shows up on console log
   }
 }
 
 function splash() {
   // this is what you would see when the game starts
-  background(200);
-  textAlign(CENTER);
-  textSize(16);
-  text("Let's Play a Game!", width / 2, height / 2);
-  textSize(12);
-  text("(click the mouse to continue)", width / 2, height / 2 + 30);
+  background(188, 184, 138); //pretty green background color
+  textAlign(CENTER); //place text 
+  textSize(16); //size of test 
+  text("Let's Play a Game!", width / 2, height / 2); //text content 
+  textSize(12); //obvi text size 
+  text("(click the mouse to continue)", width / 2, height / 2 + 30); //text content 
 
-  testBox.display(); //shows the box present 
-  testBox.spin(); //spins the box present! 
+  testBox.display(); //shows the box present (now my fly)
+  testBox.spin(); //spins the box present! (now spins my fly hehehe)
 }
 
 function play() {
   // this is what you see when the game is running 
-  background(0, 200, 0);
-  fill(0, 0, 200)
+  background(144, 238, 144); //pretty green background 
+  fill(0, 0, 200) //color text blue
   textAlign(CENTER);
   textSize(16);
   //text("This is where the Game happens", width / 2, height / 2);
   //player1.x = mouseX;
-  player1.display();
+  player1.display(); //shows my player (now my venus fly trap)
   player1.move();
   if(gameTimer.isFinished()){ //uses timer to...
     gameState = "gameOver" ///go to game over screen when time is up
@@ -85,7 +85,7 @@ text("Score: " + score, 20, 40); //text for the score
         player1.thrust(); // accelerate
         break;
       case DOWN_ARROW:
-        player1.brake();
+        player1.brake(); //slow down till still
         break;
       case LEFT_ARROW:
         player1.angle -= .02; //turn left
@@ -130,8 +130,8 @@ text("Score: " + score, 20, 40); //text for the score
 
 function gameOver() {
   // this is what you see when the game ends
-  background(0);
-  fill(255, 0, 0)
+  background(0); //black color background 
+  fill(255, 0, 0) //red text
   textAlign(CENTER);
   textSize(16);
   text("Game Over!", width / 2, height / 2);
